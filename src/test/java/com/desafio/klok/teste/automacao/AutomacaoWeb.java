@@ -50,8 +50,9 @@ public class AutomacaoWeb {
 		inputSearch.sendKeys(Keys.ENTER);
 		Thread.sleep(10000);
 		
-		WebElement product = driver.findElement(By.xpath("//*[@id=\"__next\"]/div/main/section[4]/div[3]/div/ul/li/a/div[3]/h2"));
+		WebElement product = driver.findElement(By.xpath("//div[@id='__next']/div/main/section[4]/div[3]/div/ul/li/a/div[3]/h2"));
 		assertEquals(productName, product.getText());
+		inputSearch.sendKeys(Keys.CLEAR);
 		Thread.sleep(2000);
 	}
 	
@@ -59,9 +60,8 @@ public class AutomacaoWeb {
 	public void testSearchProductFail2() throws InterruptedException {
 		WebElement inputSearch = driver.findElement(By.id("input-search"));
 		inputSearch.click();
-		String productName = "SMARTPHONE 9T Dual 128GB";
 		
-		for(int i = 0;i < 41;i++) {
+		for(int i = 0;i < 38;i++) {
 			inputSearch.sendKeys(Keys.BACK_SPACE);
 		}
 		
@@ -69,15 +69,17 @@ public class AutomacaoWeb {
 			inputSearch.sendKeys(Keys.DELETE);
 		}
 		
+		String productName = "SMARTPHONE 9T Dual 128GB";
 		inputSearch.sendKeys(productName);
 		Thread.sleep(5000);
 		
 		inputSearch.sendKeys(Keys.ENTER);
 		Thread.sleep(10000);
 	
-		WebElement product = driver.findElement(By.xpath("//*[@id=\"__next\"]/div/main/section[4]/div[3]/div/ul/li[1]/a/div[3]/h2"));
+		WebElement product = driver.findElement(By.xpath("//div[@id='__next']/div/main/section[4]/div[3]/div/ul/li/a/div[3]/h2"));
 		assertNotEquals(productName, product.getText());
+		String text = "Smartphone Xiaomi Redmi 9T Tela 6,53"+'"'+" 4GB 128GB Bateria 6000mAh Câmera Quádrupla 48+8+2+2MP Laranja";
+		assertEquals(text, product.getText());
 		Thread.sleep(2000);
 	}
-	
 }
